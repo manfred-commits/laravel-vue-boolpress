@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'PageController@index');
+
+Auth::routes();
+
+// Rotte area Admin
+// con questo tipo di rotta, si sta impostando un prefisso admin
+Route::middleware('auth')->namespace('Admin')->name('admin.')->prefix('admin')->group(function() {
+    Route::get('/', 'HomeController@index')->name('home');
 });
